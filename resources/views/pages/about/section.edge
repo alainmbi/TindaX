@@ -1,0 +1,117 @@
+@layout()
+  <section class="px-4 pb-8 pt-8 sm:px-6 lg:px-8 lg:pb-10 lg:pt-10">
+    <div class="mx-auto max-w-7xl">
+      <div class="about-subnav">
+        @each(item in navigation)
+          <a
+            href="{{ item.href }}"
+            class="about-subnav-link {{ currentPage === item.key ? 'about-subnav-link-active' : '' }}"
+          >
+            {{ item.label }}
+          </a>
+        @end
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <div class="max-w-[38rem]">
+          <span class="inline-flex rounded-full bg-tindax-50 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-tindax-700">
+            {{ page.eyebrow }}
+          </span>
+          <h1 class="mt-6 font-display text-4xl font-semibold leading-[1.06] tracking-[-0.04em] text-[#171717] sm:text-5xl lg:text-[3.85rem]">
+            {{ page.title }}
+          </h1>
+          <p class="mt-6 text-lg leading-8 text-slate-600">
+            {{ page.description }}
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="{{ page.primaryCta.href }}"
+              class="inline-flex items-center justify-center rounded-full bg-tindax-700 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-tindax-800"
+            >
+              {{ page.primaryCta.label }}
+            </a>
+            <a
+              href="{{ page.secondaryCta.href }}"
+              class="inline-flex items-center justify-center rounded-full border border-tindax-300 px-6 py-3.5 text-sm font-semibold text-tindax-800 transition hover:bg-tindax-50"
+            >
+              {{ page.secondaryCta.label }}
+            </a>
+          </div>
+        </div>
+
+        <div class="about-hero-visual">
+          <img
+            src="{{ page.imagePath }}"
+            alt="{{ page.title }}"
+            class="h-full w-full rounded-[2rem] object-cover object-top"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div class="mx-auto max-w-7xl">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-display text-4xl font-semibold tracking-[-0.04em] text-[#171717]">
+          {{ currentPage === 'team' ? "Ce qui guide l'equipe" : 'Points cles' }}
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        @each(item in page.highlights)
+          <article class="about-feature-card">
+            <span class="inline-flex h-14 w-14 items-center justify-center rounded-[1.2rem] bg-[#f5f1ea] text-tindax-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+              </svg>
+            </span>
+            <h3 class="mt-6 font-display text-[2rem] font-semibold leading-tight tracking-[-0.03em] text-[#181818]">
+              {{ item.title }}
+            </h3>
+            <p class="mt-4 text-base leading-8 text-slate-600">
+              {{ item.text }}
+            </p>
+          </article>
+        @end
+      </div>
+    </div>
+  </section>
+
+  @if(page.teamMembers)
+    <section class="px-4 pb-14 pt-6 sm:px-6 lg:px-8 lg:pb-20 lg:pt-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="mx-auto max-w-3xl text-center">
+          <h2 class="font-display text-4xl font-semibold tracking-[-0.04em] text-[#171717]">
+            Les talents en premiere ligne
+          </h2>
+          <p class="mt-4 text-lg leading-8 text-slate-500">
+            Deux profils techniques et creatifs qui contribuent directement a l'experience TindaX.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-2">
+          @each(member in page.teamMembers)
+            <article class="team-member-card">
+              <div class="overflow-hidden rounded-[1.9rem]">
+                <img src="{{ member.imagePath }}" alt="{{ member.name }}" class="h-[24rem] w-full object-cover object-top" />
+              </div>
+              <div class="p-6 sm:p-7">
+                <h3 class="font-display text-3xl font-semibold tracking-[-0.03em] text-[#171717]">
+                  {{ member.name }}
+                </h3>
+                <p class="mt-2 text-base font-semibold text-tindax-700">{{ member.role }}</p>
+                <p class="mt-4 text-base leading-8 text-slate-600">{{ member.bio }}</p>
+              </div>
+            </article>
+          @end
+        </div>
+      </div>
+    </section>
+  @end
+@end

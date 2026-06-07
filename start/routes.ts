@@ -15,6 +15,17 @@ const CustomerOrderController = () => import('#controllers/customer_order_contro
 const VendorController = () => import('#controllers/vendor_controller')
 
 router.get('/', [LandingController, 'index']).as('home')
+router.get('/services', [LandingController, 'services']).as('landing.services')
+router.get('/a-propos/qui-sommes-nous', [LandingController, 'aboutCompany']).as(
+  'landing.about.company'
+)
+router.get('/a-propos/nos-engagements', [LandingController, 'aboutCommitments']).as(
+  'landing.about.commitments'
+)
+router.get('/a-propos/notre-politique', [LandingController, 'aboutPolicy']).as(
+  'landing.about.policy'
+)
+router.get('/a-propos/notre-equipe', [LandingController, 'aboutTeam']).as('landing.about.team')
 
 router.post('/demandes/service', [LandingController, 'storeServiceRequest']).as(
   'landing.service.store'

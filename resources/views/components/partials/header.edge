@@ -1,74 +1,71 @@
-<header class="sticky top-0 z-50 border-b border-white/70 bg-mist/90 backdrop-blur-xl">
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-    <a href="{{ route('home') }}" class="flex items-center gap-3">
-      <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-tindax-900 text-lg font-extrabold text-white shadow-panel">
-        T
-      </span>
-      <div class="space-y-0.5">
-        <span class="block font-display text-lg font-semibold tracking-tight text-tindax-900">
-          TindaX
-        </span>
-        <span class="block text-xs text-slate-500">
-          Livraison et multi-services en RDC
-        </span>
-      </div>
+<header class="sticky top-0 z-50 border-b border-[#efebe3] bg-white/92 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
+    <a href="{{ route('home') }}" class="flex items-center">
+      <span class="font-display text-[2.25rem] font-semibold tracking-[-0.05em] text-tindax-700">TindaX</span>
     </a>
 
-    <div class="hidden items-center gap-3 md:flex">
+    <div class="hidden items-center gap-10 lg:flex">
       <nav aria-label="Navigation principale">
-        <ul class="flex items-center gap-2 rounded-full border border-tindax-100 bg-white/90 p-1 text-sm text-slate-600 shadow-sm">
+        <ul class="flex items-center gap-9 text-[14px] font-semibold text-slate-500">
           <li>
-            <a
-              href="{{ route('home') }}"
-              class="rounded-full px-4 py-2 font-medium text-tindax-900 transition hover:bg-tindax-50"
-            >
+            <a href="{{ route('home') }}" class="header-nav-link {{ navSection === 'home' ? 'header-nav-link-active' : '' }}">
               Accueil
             </a>
           </li>
           <li>
-            <a
-              href="{{ route('home') }}#services"
-              class="rounded-full px-4 py-2 font-medium transition hover:bg-tindax-50 hover:text-tindax-900"
-            >
+            <a href="{{ route('landing.services') }}" class="header-nav-link {{ navSection === 'services' ? 'header-nav-link-active' : '' }}">
               Services
             </a>
           </li>
-          <li>
-            <a
-              href="{{ route('home') }}#ecosysteme"
-              class="rounded-full px-4 py-2 font-medium transition hover:bg-tindax-50 hover:text-tindax-900"
+          <li class="relative" data-about-menu-root>
+            <button
+              type="button"
+              class="header-nav-link inline-flex items-center gap-2 {{ navSection === 'about' ? 'header-nav-link-active' : '' }}"
+              aria-expanded="false"
+              aria-controls="about-submenu"
+              data-about-menu-toggle
             >
-              Ecosysteme
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ route('home') }}#contact"
-              class="rounded-full px-4 py-2 font-medium transition hover:bg-tindax-50 hover:text-tindax-900"
+              <span>A Propos</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" data-about-menu-chevron>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              id="about-submenu"
+              class="about-dropdown hidden"
+              data-about-menu
             >
-              Contact
-            </a>
+              <a href="{{ route('landing.about.company') }}" class="about-dropdown-link {{ currentPage === 'company' ? 'about-dropdown-link-active' : '' }}">Qui sommes nous</a>
+              <a href="{{ route('landing.about.commitments') }}" class="about-dropdown-link {{ currentPage === 'commitments' ? 'about-dropdown-link-active' : '' }}">Nos engagements</a>
+              <a href="{{ route('landing.about.policy') }}" class="about-dropdown-link {{ currentPage === 'policy' ? 'about-dropdown-link-active' : '' }}">Notre politique</a>
+              <a href="{{ route('landing.about.team') }}" class="about-dropdown-link {{ currentPage === 'team' ? 'about-dropdown-link-active' : '' }}">Notre equipe</a>
+            </div>
           </li>
+          <li><a href="{{ route('home') }}#contact" class="header-nav-link">Tarifs</a></li>
+          <li><a href="{{ route('home') }}#contact" class="header-nav-link">Contact</a></li>
         </ul>
       </nav>
 
-      <a
-        href="{{ route('home') }}#contact"
-        class="inline-flex items-center justify-center rounded-full border border-tindax-200 px-4 py-2 text-sm font-semibold text-tindax-900 transition hover:border-tindax-300 hover:bg-white"
-      >
-        Devenir partenaire
-      </a>
-      <a
-        href="{{ route('home') }}#hero-action"
-        class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-5 py-2.5 text-sm font-semibold text-white shadow-panel transition hover:bg-tindax-800"
-      >
-        Commander
-      </a>
+      <div class="flex items-center gap-3">
+        <a
+          href="{{ route('home') }}#contact"
+          class="inline-flex h-11 items-center justify-center rounded-full border border-tindax-300 bg-white px-6 text-sm font-semibold text-tindax-700 transition hover:bg-tindax-50"
+        >
+          Connexion
+        </a>
+        <a
+          href="{{ route('home') }}#hero-action"
+          class="inline-flex h-11 items-center justify-center rounded-full bg-tindax-700 px-6 text-sm font-semibold text-white transition hover:bg-tindax-800"
+        >
+          Commencer
+        </a>
+      </div>
     </div>
 
     <button
       type="button"
-      class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-tindax-100 bg-white text-tindax-900 shadow-sm transition hover:bg-tindax-50 md:hidden"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[#e7e2d5] bg-white text-tindax-900 shadow-sm transition hover:bg-tindax-50 lg:hidden"
       aria-expanded="false"
       aria-controls="mobile-navigation-panel"
       aria-label="Ouvrir le menu"
@@ -82,18 +79,18 @@
 
   <div
     id="mobile-navigation-panel"
-    class="hidden fixed inset-0 z-50 md:hidden"
+    class="hidden fixed inset-0 z-50 items-start justify-end overflow-y-auto lg:hidden"
     data-mobile-menu
   >
     <button
       type="button"
-      class="absolute inset-0 bg-ink/35 backdrop-blur-sm"
+      class="absolute inset-0 bg-ink/55 backdrop-blur-sm"
       aria-label="Fermer le menu"
       data-mobile-menu-backdrop
       data-mobile-menu-close
     ></button>
 
-    <div class="relative ml-auto flex h-full w-full max-w-xs flex-col bg-white p-5 shadow-soft">
+    <div class="relative flex min-h-full w-full flex-col overflow-y-auto bg-white px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] shadow-soft md:ml-auto md:min-h-screen md:max-w-sm">
       <div class="flex items-center justify-between gap-4">
         <div>
           <p class="font-display text-lg font-semibold text-tindax-950">TindaX</p>
@@ -111,51 +108,52 @@
         </button>
       </div>
 
-      <nav aria-label="Navigation mobile" class="mt-8 flex flex-col gap-2 text-sm">
-        <a
-          href="{{ route('home') }}"
-          class="rounded-2xl bg-tindax-900 px-4 py-3 font-semibold text-white"
-          data-mobile-menu-close
-        >
+      <nav aria-label="Navigation mobile" class="mt-8 flex flex-col gap-3 text-sm">
+        <a href="{{ route('home') }}" class="mobile-nav-link {{ navSection === 'home' ? 'mobile-nav-link-active' : '' }}" data-mobile-menu-close>
           Accueil
         </a>
-        <a
-          href="{{ route('home') }}#services"
-          class="rounded-2xl border border-tindax-100 px-4 py-3 font-medium text-slate-700"
-          data-mobile-menu-close
-        >
+        <a href="{{ route('landing.services') }}" class="mobile-nav-link {{ navSection === 'services' ? 'mobile-nav-link-active' : '' }}" data-mobile-menu-close>
           Services
         </a>
-        <a
-          href="{{ route('home') }}#ecosysteme"
-          class="rounded-2xl border border-tindax-100 px-4 py-3 font-medium text-slate-700"
-          data-mobile-menu-close
-        >
-          Ecosysteme
-        </a>
-        <a
-          href="{{ route('home') }}#contact"
-          class="rounded-2xl border border-tindax-100 px-4 py-3 font-medium text-slate-700"
-          data-mobile-menu-close
-        >
+        <div class="rounded-[1.3rem] border border-tindax-100">
+          <button
+            type="button"
+            class="mobile-nav-link flex w-full items-center justify-between gap-3 border-0 {{ navSection === 'about' ? 'mobile-nav-link-active' : '' }}"
+            aria-expanded="false"
+            aria-controls="mobile-about-panel"
+            data-mobile-about-toggle
+          >
+            <span>A Propos</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" data-mobile-about-chevron>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <div id="mobile-about-panel" class="hidden border-t border-tindax-100 px-3 pb-3 pt-1" data-mobile-about-panel>
+            <a href="{{ route('landing.about.company') }}" class="about-mobile-link {{ currentPage === 'company' ? 'about-mobile-link-active' : '' }}" data-mobile-menu-close>Qui sommes nous</a>
+            <a href="{{ route('landing.about.commitments') }}" class="about-mobile-link {{ currentPage === 'commitments' ? 'about-mobile-link-active' : '' }}" data-mobile-menu-close>Nos engagements</a>
+            <a href="{{ route('landing.about.policy') }}" class="about-mobile-link {{ currentPage === 'policy' ? 'about-mobile-link-active' : '' }}" data-mobile-menu-close>Notre politique</a>
+            <a href="{{ route('landing.about.team') }}" class="about-mobile-link {{ currentPage === 'team' ? 'about-mobile-link-active' : '' }}" data-mobile-menu-close>Notre equipe</a>
+          </div>
+        </div>
+        <a href="{{ route('home') }}#contact" class="mobile-nav-link" data-mobile-menu-close>
           Contact
         </a>
       </nav>
 
-      <div class="mt-auto grid gap-3 pt-8">
+      <div class="mt-8 grid gap-3 pt-2 md:mt-auto md:pt-8">
         <a
           href="{{ route('home') }}#contact"
           class="inline-flex items-center justify-center rounded-full border border-tindax-200 px-5 py-3 text-sm font-semibold text-tindax-900"
           data-mobile-menu-close
         >
-          Devenir partenaire
+          Connexion
         </a>
         <a
           href="{{ route('home') }}#hero-action"
           class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-5 py-3 text-sm font-semibold text-white"
           data-mobile-menu-close
         >
-          Commander
+          Commencer
         </a>
       </div>
     </div>
