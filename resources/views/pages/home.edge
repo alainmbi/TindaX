@@ -1,88 +1,737 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      AdonisJS - A fully featured web framework for Node.js
-    </title>
+@layout('layouts/main')
 
-    <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link
-      href="https://fonts.bunny.net/css?family=instrument-sans:400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
+@section('content')
+  <section id="hero-action" class="px-4 pb-8 pt-8 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+      <div class="overflow-hidden rounded-[2rem] bg-hero-glow px-6 py-8 text-white shadow-soft sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-gold-100">
+            Infrastructure premium
+          </span>
+          <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-medium text-white/80">
+            Kinshasa, puis expansion nationale
+          </span>
+        </div>
 
-    <style>
-      :root {
-        --sand-1: #fdfdfc;
-        --sand-2: #f9f9f8;
-        --sand-3: #f1f0ef;
-        --sand-4: #e9e8e6;
-        --sand-5: #e2e1de;
-        --sand-6: #dad9d6;
-        --sand-7: #cfceca;
-        --sand-8: #bcbbb5;
-        --sand-9: #8d8d86;
-        --sand-10: #82827c;
-        --sand-11: #63635e;
-        --sand-12: #21201c;
-      }
-    </style>
+        <div class="mt-8 max-w-2xl space-y-5">
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.28em] text-gold-200">
+            Livraison intelligente en Republique Democratique du Congo
+          </p>
+          <h1 class="font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+            Tous vos services essentiels, livres avec elegance et precision.
+          </h1>
+          <p class="max-w-xl text-base leading-8 text-white/78 sm:text-lg">
+            TindaX orchestre les livraisons, les courses urbaines et les operations marchandes
+            dans une seule experience mobile-first, rapide et rassurante pour les villes
+            congolaises.
+          </p>
+        </div>
 
-    <script src="https://cdn.tailwindcss.com">
-      
-    </script>
+        <form
+          action="{{ route('landing.service.store') }}"
+          method="POST"
+          class="mt-8 rounded-[1.75rem] border border-white/12 bg-white/10 p-3 backdrop-blur"
+        >
+          {{ csrfField() }}
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <label class="sr-only" for="service-search">Rechercher un service</label>
+            <input
+              id="service-search"
+              name="serviceQuery"
+              type="text"
+              value="{{ old('serviceQuery') || '' }}"
+              placeholder="Rechercher une livraison, un commerce ou une course..."
+              aria-invalid="{{ flashMessages.has('inputErrorsBag.serviceQuery') ? 'true' : 'false' }}"
+              class="h-14 flex-1 rounded-[1.2rem] border bg-white px-5 text-sm text-slate-800 outline-none ring-0 placeholder:text-slate-400 focus:border-gold-200 {{
+                flashMessages.has('inputErrorsBag.serviceQuery')
+                  ? 'border-rose-300 focus:border-rose-300'
+                  : 'border-white/10'
+              }}"
+            />
+            <button
+              type="submit"
+              class="inline-flex h-14 items-center justify-center rounded-[1.2rem] bg-gold-300 px-6 text-sm font-semibold text-ink transition hover:bg-gold-200"
+            >
+              Lancer une demande
+            </button>
+          </div>
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: [ "Instrument Sans", "sans-serif" ]
-            },
-            colors: {
-              primary: {
-                DEFAULT: "#5A45FF",
-                lighter: "#a599ff"
-              },
-              sand: {
-                1: "var(--sand-1)",
-                2: "var(--sand-2)",
-                3: "var(--sand-3)",
-                4: "var(--sand-4)",
-                5: "var(--sand-5)",
-                6: "var(--sand-6)",
-                7: "var(--sand-7)",
-                8: "var(--sand-8)",
-                9: "var(--sand-9)",
-                10: "var(--sand-10)",
-                11: "var(--sand-11)",
-                12: "var(--sand-12)"
-              }
-            }
-          }
-        }
-      };
-    </script>
+          @inputError('serviceQuery')
+            <div class="mt-3 rounded-[1.1rem] border border-rose-200/30 bg-rose-100/10 px-4 py-3">
+              @each(message in $messages)
+                <p class="text-sm font-medium text-rose-100">{{ message }}</p>
+              @end
+            </div>
+          @end
+        </form>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @stack('dumper')
-  </head>
-  <body class="min-h-screen w-screen font-sans">
-    <header>
-    </header>
-    <main>
-      <div class="container mx-auto">
-        <h1 class="text-4xl font-bold text-primary">
-          Bienvenu dans le racoursseur d'url
-        </h1>
-        <p class="text-lg text-sand-11">
-          Ici sera le formulaire de saisie de l'url
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-[1.5rem] border border-white/12 bg-white/10 p-4 backdrop-blur">
+            <p class="text-sm text-white/72">Commandes fluides</p>
+            <p class="mt-2 font-display text-2xl font-semibold">24/7</p>
+          </div>
+          <div class="rounded-[1.5rem] border border-white/12 bg-white/10 p-4 backdrop-blur">
+            <p class="text-sm text-white/72">Suivi de livraison</p>
+            <p class="mt-2 font-display text-2xl font-semibold">Temps reel</p>
+          </div>
+          <div class="rounded-[1.5rem] border border-white/12 bg-white/10 p-4 backdrop-blur">
+            <p class="text-sm text-white/72">Reseau marchands</p>
+            <p class="mt-2 font-display text-2xl font-semibold">Multi-secteurs</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="grid gap-6">
+        <div class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="font-display text-sm font-semibold uppercase tracking-[0.24em] text-tindax-700">
+                TindaX Flow
+              </p>
+              <h2 class="mt-3 font-display text-2xl font-semibold text-tindax-950">
+                Une logistique claire pour les villes congolaises.
+              </h2>
+            </div>
+            <span class="rounded-full bg-tindax-50 px-3 py-1 text-xs font-semibold text-tindax-700">
+              Mobile-first
+            </span>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="rounded-[1.5rem] bg-tindax-50 p-4">
+              <p class="text-sm font-semibold text-tindax-900">Commande centralisee</p>
+              <p class="mt-2 text-sm leading-7 text-slate-600">
+                Une interface simple pour demander une livraison, une course ou un service sans
+                friction.
+              </p>
+            </div>
+            <div class="rounded-[1.5rem] bg-slate-50 p-4">
+              <p class="text-sm font-semibold text-slate-900">Operations pilotees</p>
+              <p class="mt-2 text-sm leading-7 text-slate-600">
+                Des statuts clairs pour le client, le livreur et le commercant a chaque etape.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel">
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.24em] text-gold-400">
+            Priorites produit
+          </p>
+          <div class="mt-5 space-y-4">
+            <div class="flex items-start gap-4 rounded-[1.25rem] border border-slate-100 p-4">
+              <span class="mt-1 h-3.5 w-3.5 rounded-full bg-tindax-700"></span>
+              <div>
+                <p class="font-semibold text-slate-900">Experience client premium</p>
+                <p class="mt-1 text-sm leading-7 text-slate-600">
+                  Acces rapide, navigation lisible et actions visibles sur smartphone.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 rounded-[1.25rem] border border-slate-100 p-4">
+              <span class="mt-1 h-3.5 w-3.5 rounded-full bg-gold-300"></span>
+              <div>
+                <p class="font-semibold text-slate-900">Confiance operationnelle</p>
+                <p class="mt-1 text-sm leading-7 text-slate-600">
+                  Paiement, tracking et qualite de service penses pour la realite locale.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="services" class="px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-2xl">
+        <p class="font-display text-sm font-semibold uppercase tracking-[0.28em] text-tindax-700">
+          Trois piliers, une seule plateforme
+        </p>
+        <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-tindax-950 sm:text-4xl">
+          TindaX connecte les besoins quotidiens des clients, la mobilite des coursiers et la
+          croissance des commercants.
+        </h2>
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          Chaque brique du produit est pensee pour reduire la friction, augmenter la confiance et
+          rendre les services urbains plus accessibles dans les grandes villes de la RDC.
         </p>
       </div>
-    </main>
-    <footer>
-    </footer>
-  </body>
-</html>
+
+      <div id="ecosysteme" class="mt-8 grid gap-5 lg:grid-cols-3">
+        <article class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel">
+          <span class="inline-flex rounded-full bg-tindax-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-tindax-700">
+            Clients
+          </span>
+          <h3 class="mt-5 font-display text-2xl font-semibold text-tindax-950">
+            Commander rapidement, suivre clairement.
+          </h3>
+          <p class="mt-4 text-sm leading-7 text-slate-600">
+            Une interface simple pour lancer une course, trouver un service ou recevoir une
+            livraison avec une experience mobile nette et rassurante.
+          </p>
+          <ul class="mt-6 space-y-3 text-sm text-slate-700">
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-tindax-700"></span>
+              Demande rapide en quelques gestes
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-tindax-700"></span>
+              Suivi lisible des etapes de livraison
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-tindax-700"></span>
+              Decouverte de services urbains fiables
+            </li>
+          </ul>
+        </article>
+
+        <article class="rounded-[2rem] border border-tindax-100 bg-tindax-900 p-6 text-white shadow-soft">
+          <span class="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-gold-100">
+            Livreurs
+          </span>
+          <h3 class="mt-5 font-display text-2xl font-semibold">
+            Rouler mieux, livrer plus intelligemment.
+          </h3>
+          <p class="mt-4 text-sm leading-7 text-white/78">
+            Le parcours coursier est pense pour la performance terrain, avec des affectations plus
+            claires, une lecture rapide des missions et une logique d'optimisation future.
+          </p>
+          <ul class="mt-6 space-y-3 text-sm text-white/84">
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-gold-200"></span>
+              Missions visibles et prioritaires
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-gold-200"></span>
+              Flux mobile adapte au terrain
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-gold-200"></span>
+              Base ideale pour l'optimisation IA
+            </li>
+          </ul>
+        </article>
+
+        <article class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel">
+          <span class="inline-flex rounded-full bg-gold-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-800">
+            Commercants
+          </span>
+          <h3 class="mt-5 font-display text-2xl font-semibold text-tindax-950">
+            Vendre plus proprement, operer plus vite.
+          </h3>
+          <p class="mt-4 text-sm leading-7 text-slate-600">
+            Les marchands disposent d'un point d'entree premium pour presenter leurs offres,
+            recevoir des commandes et suivre leurs operations de livraison.
+          </p>
+          <ul class="mt-6 space-y-3 text-sm text-slate-700">
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-gold-300"></span>
+              Mise en avant du catalogue
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-gold-300"></span>
+              Pilotage des commandes simplifie
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-gold-300"></span>
+              Meilleure visibilite sur la logistique
+            </li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="rounded-[2rem] bg-tindax-900 p-6 text-white shadow-soft sm:p-8">
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.28em] text-gold-200">
+            Services & impact
+          </p>
+          <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            Une logistique urbaine pensee pour les usages les plus frequents.
+          </h2>
+          <p class="mt-4 max-w-xl text-sm leading-8 text-white/76 sm:text-base">
+            TindaX structure les demandes les plus courantes en experiences lisibles et rapides,
+            depuis la commande repas jusqu'aux courses du quotidien et aux livraisons de colis.
+          </p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
+              <p class="text-sm font-semibold text-white">Repas</p>
+              <p class="mt-2 text-sm leading-7 text-white/70">
+                Restaurants, snacks, boulangeries et marques food locales.
+              </p>
+            </div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
+              <p class="text-sm font-semibold text-white">Colis</p>
+              <p class="mt-2 text-sm leading-7 text-white/70">
+                Documents, commandes e-commerce et livraisons express en ville.
+              </p>
+            </div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4 backdrop-blur">
+              <p class="text-sm font-semibold text-white">Courses</p>
+              <p class="mt-2 text-sm leading-7 text-white/70">
+                Achats, commissions et depannages du quotidien.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <article class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel">
+            <p class="text-sm font-medium text-slate-500">Livraisons orchestrees</p>
+            <p class="mt-4 font-display text-4xl font-semibold text-tindax-950">10K+</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">
+              Courses et trajets pilotes avec une lecture claire des etapes.
+            </p>
+          </article>
+
+          <article class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel">
+            <p class="text-sm font-medium text-slate-500">Commercants actives</p>
+            <p class="mt-4 font-display text-4xl font-semibold text-tindax-950">1K+</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">
+              Boutiques, restaurants et enseignes connectes a la plateforme.
+            </p>
+          </article>
+
+          <article class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel">
+            <p class="text-sm font-medium text-slate-500">Satisfaction visee</p>
+            <p class="mt-4 font-display text-4xl font-semibold text-tindax-950">99%</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">
+              Qualite d'execution, transparence et confiance dans chaque interaction.
+            </p>
+          </article>
+
+          <article class="rounded-[2rem] border border-tindax-100 bg-gradient-to-br from-gold-100 via-white to-tindax-50 p-6 shadow-panel">
+            <p class="text-sm font-medium text-slate-500">Villes cibles</p>
+            <p class="mt-4 font-display text-4xl font-semibold text-tindax-950">3+</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">
+              Kinshasa d'abord, avec une expansion pensee pour les grands poles urbains.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl overflow-hidden rounded-[2.25rem] bg-gradient-to-br from-[#0d1815] via-tindax-950 to-[#153326] px-6 py-8 text-white shadow-soft sm:px-8 sm:py-10 lg:px-10">
+      <div class="grid gap-8 lg:grid-cols-[1fr_0.95fr] lg:items-center">
+        <div>
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.28em] text-gold-200">
+            Assistant IA TindaX
+          </p>
+          <h2 class="mt-4 max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+            Une navigation intelligente pour aider les livreurs a mieux lire la ville.
+          </h2>
+          <p class="mt-5 max-w-2xl text-sm leading-8 text-white/76 sm:text-base">
+            TindaX prepare une couche d'assistance plus fluide pour recommander de meilleurs
+            trajets, prioriser les missions et reduire les temps morts sur le terrain.
+          </p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+              <p class="text-sm font-semibold text-white">Orientation terrain</p>
+              <p class="mt-2 text-sm leading-7 text-white/70">
+                Une lecture plus nette des points de depart, d'arrivee et des priorites.
+              </p>
+            </div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+              <p class="text-sm font-semibold text-white">Optimisation future</p>
+              <p class="mt-2 text-sm leading-7 text-white/70">
+                Base ideale pour suggester des trajets plus rentables et plus rapides.
+              </p>
+            </div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+              <p class="text-sm font-semibold text-white">Meilleure cadence</p>
+              <p class="mt-2 text-sm leading-7 text-white/70">
+                Une experience qui aide le coursier a enchainer les missions sereinement.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-white/10 bg-white/10 p-5 backdrop-blur-xl">
+          <div class="rounded-[1.7rem] border border-white/10 bg-[#f7fbf8] p-5 text-slate-900 shadow-panel">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="font-display text-sm font-semibold uppercase tracking-[0.24em] text-tindax-700">
+                  Assistant en direct
+                </p>
+                <p class="mt-2 text-sm text-slate-500">
+                  Lecture intelligente des missions et de la pression terrain.
+                </p>
+              </div>
+              <span class="rounded-full bg-tindax-900 px-3 py-1 text-xs font-semibold text-white">
+                IA Flow
+              </span>
+            </div>
+
+            <div class="mt-6 space-y-4">
+              <div class="rounded-[1.4rem] bg-tindax-50 p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-tindax-700">
+                  Recommandation
+                </p>
+                <p class="mt-2 text-sm leading-7 text-slate-700">
+                  Prioriser les livraisons proches et lisser les detours entre points de retrait.
+                </p>
+              </div>
+              <div class="rounded-[1.4rem] bg-slate-50 p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">
+                  Signal utile
+                </p>
+                <p class="mt-2 text-sm leading-7 text-slate-700">
+                  Identifier les plages d'activite et les zones ou la demande devient plus dense.
+                </p>
+              </div>
+              <div class="flex items-center justify-between rounded-[1.4rem] border border-slate-100 p-4">
+                <div>
+                  <p class="text-sm font-semibold text-slate-900">Trajets mieux enchaines</p>
+                  <p class="mt-1 text-sm text-slate-500">Moins de friction, plus de lisibilite.</p>
+                </div>
+                <span class="font-display text-2xl font-semibold text-tindax-900">-28%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div class="max-w-2xl">
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.28em] text-tindax-700">
+            Rejoindre l'ecosysteme
+          </p>
+          <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-tindax-950 sm:text-4xl">
+            Deux portes d'entree pour accelerer la croissance de TindaX.
+          </h2>
+        </div>
+        <p class="max-w-xl text-sm leading-7 text-slate-600">
+          Que vous vendiez deja en ligne ou que vous rouliez deja en ville, TindaX vous donne un
+          cadre plus premium pour operer.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <article class="overflow-hidden rounded-[2rem] border border-tindax-100 bg-white shadow-panel">
+          <div class="bg-gradient-to-r from-tindax-900 via-tindax-800 to-tindax-700 px-6 py-6 text-white sm:px-8">
+            <p class="font-display text-sm font-semibold uppercase tracking-[0.24em] text-gold-200">
+              Pour les marchands
+            </p>
+            <h3 class="mt-3 font-display text-3xl font-semibold">
+              Transformez votre catalogue en moteur de commande.
+            </h3>
+            <p class="mt-4 max-w-xl text-sm leading-8 text-white/76">
+              Mettez vos produits en avant, centralisez vos commandes et profitez d'une
+              logistique plus claire pour servir votre clientele.
+            </p>
+          </div>
+          <div class="p-6 sm:p-8">
+            <ul class="space-y-4 text-sm text-slate-700">
+              <li class="flex items-start gap-3">
+                <span class="mt-2 h-2.5 w-2.5 rounded-full bg-tindax-700"></span>
+                Catalogue lisible et valorisant pour la vente mobile
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-2 h-2.5 w-2.5 rounded-full bg-tindax-700"></span>
+                Reception et suivi des commandes dans un flux unique
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-2 h-2.5 w-2.5 rounded-full bg-tindax-700"></span>
+                Visibilite renforcee sur la livraison et la satisfaction client
+              </li>
+            </ul>
+
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="{{ route('landing.cta.vendor') }}"
+                class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-tindax-800"
+              >
+                Devenir marchand partenaire
+              </a>
+              <a
+                href="{{ route('landing.cta.vendor') }}"
+                class="inline-flex items-center justify-center rounded-full border border-tindax-200 px-5 py-3 text-sm font-semibold text-tindax-900 transition hover:bg-tindax-50"
+              >
+                Demander une demo
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="overflow-hidden rounded-[2rem] border border-tindax-100 bg-white shadow-panel">
+          <div class="bg-gradient-to-r from-[#f7f7f3] via-white to-gold-100 px-6 py-6 sm:px-8">
+            <p class="font-display text-sm font-semibold uppercase tracking-[0.24em] text-amber-800">
+              Pour les motards
+            </p>
+            <h3 class="mt-3 font-display text-3xl font-semibold text-tindax-950">
+              Rejoignez un reseau plus structure pour livrer.
+            </h3>
+            <p class="mt-4 max-w-xl text-sm leading-8 text-slate-600">
+              TindaX prepare un environnement plus net pour attribuer les missions, fluidifier les
+              trajets et valoriser les meilleurs profils terrain.
+            </p>
+          </div>
+          <div class="p-6 sm:p-8">
+            <ul class="space-y-4 text-sm text-slate-700">
+              <li class="flex items-start gap-3">
+                <span class="mt-2 h-2.5 w-2.5 rounded-full bg-gold-300"></span>
+                Missions plus visibles et mieux priorisees
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-2 h-2.5 w-2.5 rounded-full bg-gold-300"></span>
+                Experience mobile pensee pour la route et la vitesse d'execution
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-2 h-2.5 w-2.5 rounded-full bg-gold-300"></span>
+                Base solide pour la navigation assistee et l'optimisation IA
+              </li>
+            </ul>
+
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="{{ route('landing.cta.driver') }}"
+                class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-tindax-800"
+              >
+                Postuler comme livreur
+              </a>
+              <a
+                href="{{ route('landing.cta.driver') }}"
+                class="inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              >
+                Recevoir les criteres
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+      <div class="rounded-[2rem] bg-white p-6 shadow-panel sm:p-8">
+        <p class="font-display text-sm font-semibold uppercase tracking-[0.28em] text-tindax-700">
+          Contact & newsletter
+        </p>
+        <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-tindax-950 sm:text-4xl">
+          Laissez TindaX vous recontacter au bon moment.
+        </h2>
+        <p class="mt-4 text-sm leading-8 text-slate-600 sm:text-base">
+          Que vous soyez commercant, livreur ou futur client entreprise, nous pouvons vous
+          presenter la plateforme, partager notre feuille de route et vous prevenir du lancement.
+        </p>
+
+        <div class="mt-8 grid gap-4">
+          <div class="rounded-[1.5rem] bg-tindax-50 p-4">
+            <p class="text-sm font-semibold text-tindax-900">Partenariats marchands</p>
+            <p class="mt-2 text-sm leading-7 text-slate-600">
+              Integrer votre commerce, structurer votre catalogue et preparer vos operations.
+            </p>
+          </div>
+          <div class="rounded-[1.5rem] bg-slate-50 p-4">
+            <p class="text-sm font-semibold text-slate-900">Recrutement livreurs</p>
+            <p class="mt-2 text-sm leading-7 text-slate-600">
+              Comprendre les criteres, le parcours d'onboarding et les zones prioritaires.
+            </p>
+          </div>
+          <div class="rounded-[1.5rem] bg-gradient-to-r from-gold-100 to-white p-4">
+            <p class="text-sm font-semibold text-amber-900">Lancement & actualites</p>
+            <p class="mt-2 text-sm leading-7 text-slate-700">
+              Recevoir les mises a jour produit, les villes ouvertes et les annonces TindaX.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="lead-form" class="rounded-[2rem] border border-tindax-100 bg-white p-6 shadow-panel sm:p-8">
+        <div class="flex flex-col gap-3 border-b border-slate-100 pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="font-display text-sm font-semibold uppercase tracking-[0.24em] text-gold-400">
+              Formulaire de contact
+            </p>
+            <h3 class="mt-3 font-display text-2xl font-semibold text-tindax-950">
+              Capturer les premiers leads avec elegance.
+            </h3>
+          </div>
+          <p class="text-sm text-slate-500">Reponse equipee pour mobile et rapide a completer.</p>
+        </div>
+
+        <form action="{{ route('landing.lead.store') }}" method="POST" class="mt-6 grid gap-4">
+          {{ csrfField() }}
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="full-name" class="mb-2 block text-sm font-semibold text-slate-700">
+                Nom complet
+              </label>
+              <input
+                id="full-name"
+                name="fullName"
+                type="text"
+                value="{{ old('fullName') || '' }}"
+                placeholder="Votre nom"
+                aria-invalid="{{ flashMessages.has('inputErrorsBag.fullName') ? 'true' : 'false' }}"
+                class="h-14 w-full rounded-[1.1rem] border bg-mist px-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:bg-white {{
+                  flashMessages.has('inputErrorsBag.fullName')
+                    ? 'border-rose-300 focus:border-rose-300'
+                    : 'border-slate-200 focus:border-tindax-300'
+                }}"
+              />
+              @inputError('fullName')
+                @each(message in $messages)
+                  <p class="mt-2 text-sm font-medium text-rose-600">{{ message }}</p>
+                @end
+              @end
+            </div>
+            <div>
+              <label for="phone" class="mb-2 block text-sm font-semibold text-slate-700">
+                Telephone
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                value="{{ old('phone') || '' }}"
+                placeholder="+243..."
+                aria-invalid="{{ flashMessages.has('inputErrorsBag.phone') ? 'true' : 'false' }}"
+                class="h-14 w-full rounded-[1.1rem] border bg-mist px-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:bg-white {{
+                  flashMessages.has('inputErrorsBag.phone')
+                    ? 'border-rose-300 focus:border-rose-300'
+                    : 'border-slate-200 focus:border-tindax-300'
+                }}"
+              />
+              @inputError('phone')
+                @each(message in $messages)
+                  <p class="mt-2 text-sm font-medium text-rose-600">{{ message }}</p>
+                @end
+              @end
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value="{{ old('email') || '' }}"
+                placeholder="vous@exemple.com"
+                aria-invalid="{{ flashMessages.has('inputErrorsBag.email') ? 'true' : 'false' }}"
+                class="h-14 w-full rounded-[1.1rem] border bg-mist px-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:bg-white {{
+                  flashMessages.has('inputErrorsBag.email')
+                    ? 'border-rose-300 focus:border-rose-300'
+                    : 'border-slate-200 focus:border-tindax-300'
+                }}"
+              />
+              @inputError('email')
+                @each(message in $messages)
+                  <p class="mt-2 text-sm font-medium text-rose-600">{{ message }}</p>
+                @end
+              @end
+            </div>
+            <div>
+              <label for="profile" class="mb-2 block text-sm font-semibold text-slate-700">
+                Je suis
+              </label>
+              <select
+                id="profile"
+                name="profile"
+                aria-invalid="{{ flashMessages.has('inputErrorsBag.profile') ? 'true' : 'false' }}"
+                class="h-14 w-full rounded-[1.1rem] border bg-mist px-4 text-sm text-slate-900 outline-none transition focus:bg-white {{
+                  flashMessages.has('inputErrorsBag.profile')
+                    ? 'border-rose-300 focus:border-rose-300'
+                    : 'border-slate-200 focus:border-tindax-300'
+                }}"
+              >
+                <option value="Client entreprise" {{ old('profile') === 'Client entreprise' ? 'selected' : '' }}>
+                  Client entreprise
+                </option>
+                <option value="Commercant" {{ old('profile') === 'Commercant' ? 'selected' : '' }}>
+                  Commercant
+                </option>
+                <option value="Livreur" {{ old('profile') === 'Livreur' ? 'selected' : '' }}>
+                  Livreur
+                </option>
+                <option value="Partenaire" {{ old('profile') === 'Partenaire' ? 'selected' : '' }}>
+                  Partenaire
+                </option>
+              </select>
+              @inputError('profile')
+                @each(message in $messages)
+                  <p class="mt-2 text-sm font-medium text-rose-600">{{ message }}</p>
+                @end
+              @end
+            </div>
+          </div>
+
+          <div>
+            <label for="message" class="mb-2 block text-sm font-semibold text-slate-700">
+              Besoin ou message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Parlez-nous de votre besoin, de votre commerce ou de votre candidature..."
+              aria-invalid="{{ flashMessages.has('inputErrorsBag.message') ? 'true' : 'false' }}"
+              class="w-full rounded-[1.1rem] border bg-mist px-4 py-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:bg-white {{
+                flashMessages.has('inputErrorsBag.message')
+                  ? 'border-rose-300 focus:border-rose-300'
+                  : 'border-slate-200 focus:border-tindax-300'
+              }}"
+            >{{ old('message') || '' }}</textarea>
+            @inputError('message')
+              @each(message in $messages)
+                <p class="mt-2 text-sm font-medium text-rose-600">{{ message }}</p>
+              @end
+            @end
+          </div>
+
+          <div class="flex flex-col gap-3 rounded-[1.5rem] bg-tindax-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+            <p class="max-w-xl text-sm leading-7 text-slate-600">
+              Recevoir aussi les actualites TindaX, les ouvertures de zones et les futures
+              opportunites de partenariat.
+            </p>
+            <label class="inline-flex items-center gap-3 text-sm font-medium text-tindax-900">
+              <input
+                type="checkbox"
+                name="newsletterOptIn"
+                value="on"
+                {{ old('newsletterOptIn') === 'on' ? 'checked' : '' }}
+                class="h-5 w-5 rounded border-tindax-300 text-tindax-700 focus:ring-tindax-300"
+              />
+              Oui, je m'inscris
+            </label>
+          </div>
+          @inputError('newsletterOptIn')
+            @each(message in $messages)
+              <p class="-mt-1 text-sm font-medium text-rose-600">{{ message }}</p>
+            @end
+          @end
+
+          <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-sm text-slate-500">
+              En soumettant, vous demandez a etre contacte par l'equipe TindaX.
+            </p>
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-tindax-800"
+            >
+              Envoyer ma demande
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+@end

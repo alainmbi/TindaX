@@ -1,0 +1,72 @@
+<article class="overflow-hidden rounded-[2rem] border border-tindax-100 bg-white shadow-panel">
+  <div
+    class="{{
+      theme === 'merchant'
+        ? 'bg-gradient-to-r from-tindax-900 via-tindax-800 to-tindax-700 px-6 py-6 text-white sm:px-8'
+        : 'bg-gradient-to-r from-[#f7f7f3] via-white to-gold-100 px-6 py-6 sm:px-8'
+    }}"
+  >
+    <p
+      class="{{
+        theme === 'merchant'
+          ? 'font-display text-sm font-semibold uppercase tracking-[0.24em] text-gold-200'
+          : 'font-display text-sm font-semibold uppercase tracking-[0.24em] text-amber-800'
+      }}"
+    >
+      {{ eyebrow }}
+    </p>
+    <h3
+      class="{{
+        theme === 'merchant'
+          ? 'mt-3 font-display text-3xl font-semibold'
+          : 'mt-3 font-display text-3xl font-semibold text-tindax-950'
+      }}"
+    >
+      {{ title }}
+    </h3>
+    <p
+      class="{{
+        theme === 'merchant'
+          ? 'mt-4 max-w-xl text-sm leading-8 text-white/76'
+          : 'mt-4 max-w-xl text-sm leading-8 text-slate-600'
+      }}"
+    >
+      {{ description }}
+    </p>
+  </div>
+  <div class="p-6 sm:p-8">
+    <ul class="space-y-4 text-sm text-slate-700">
+      @each(item in items)
+        <li class="flex items-start gap-3">
+          <span
+            class="{{
+              theme === 'merchant'
+                ? 'mt-2 h-2.5 w-2.5 rounded-full bg-tindax-700'
+                : 'mt-2 h-2.5 w-2.5 rounded-full bg-gold-300'
+            }}"
+          ></span>
+          {{ item }}
+        </li>
+      @endeach
+    </ul>
+
+    <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+      <a
+        href="{{ primaryHref }}"
+        class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-tindax-800"
+      >
+        {{ primaryLabel }}
+      </a>
+      <a
+        href="{{ secondaryHref }}"
+        class="{{
+          theme === 'merchant'
+            ? 'inline-flex items-center justify-center rounded-full border border-tindax-200 px-5 py-3 text-sm font-semibold text-tindax-900 transition hover:bg-tindax-50'
+            : 'inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50'
+        }}"
+      >
+        {{ secondaryLabel }}
+      </a>
+    </div>
+  </div>
+</article>

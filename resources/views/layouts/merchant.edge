@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="{{ pageDescription || 'Espace marchand TindaX pour piloter boutique, catalogue et operations.' }}"
+    />
+    <title>TindaX Merchant | {{ pageTitle || 'Espace vendeur' }}</title>
+
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=manrope:400,500,600,700,800|sora:500,600,700,800"
+      rel="stylesheet"
+    />
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('dumper')
+  </head>
+  <body class="min-h-screen bg-mist font-sans text-ink antialiased">
+    <div class="min-h-screen lg:grid lg:grid-cols-[18rem_1fr]">
+      <aside class="border-b border-white/80 bg-tindax-950 text-white lg:min-h-screen lg:border-b-0 lg:border-r lg:border-white/10">
+        <div class="flex items-center justify-between px-5 py-5 sm:px-6 lg:px-7">
+          <a href="{{ route('vendor.dashboard') }}" class="flex items-center gap-3">
+            <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-lg font-extrabold text-white">
+              T
+            </span>
+            <div>
+              <p class="font-display text-lg font-semibold">TindaX Merchant</p>
+              <p class="text-xs text-white/60">Pilotage boutique</p>
+            </div>
+          </a>
+
+          <a
+            href="{{ route('home') }}"
+            class="rounded-full border border-white/10 px-3 py-2 text-xs font-semibold text-white/80 transition hover:bg-white/10 lg:hidden"
+          >
+            Site
+          </a>
+        </div>
+
+        <nav class="px-5 pb-6 sm:px-6 lg:px-7">
+          <div class="flex gap-2 overflow-x-auto pb-3 lg:flex-col lg:overflow-visible">
+            <a
+              href="{{ route('vendor.dashboard') }}"
+              class="{{
+                activeSection === 'dashboard'
+                  ? 'whitespace-nowrap rounded-[1.2rem] bg-white px-4 py-3 text-sm font-semibold text-tindax-950 shadow-sm'
+                  : 'whitespace-nowrap rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/74 transition hover:bg-white/10'
+              }}"
+            >
+              Dashboard
+            </a>
+            <a
+              href="{{ route('vendor.products') }}"
+              class="{{
+                activeSection === 'products'
+                  ? 'whitespace-nowrap rounded-[1.2rem] bg-white px-4 py-3 text-sm font-semibold text-tindax-950 shadow-sm'
+                  : 'whitespace-nowrap rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/74 transition hover:bg-white/10'
+              }}"
+            >
+              Produits
+            </a>
+            <a
+              href="{{ route('vendor.orders') }}"
+              class="{{
+                activeSection === 'orders'
+                  ? 'whitespace-nowrap rounded-[1.2rem] bg-white px-4 py-3 text-sm font-semibold text-tindax-950 shadow-sm'
+                  : 'whitespace-nowrap rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/74 transition hover:bg-white/10'
+              }}"
+            >
+              Commandes
+            </a>
+            <a
+              href="{{ route('vendor.dashboard') }}#parametres"
+              class="{{
+                activeSection === 'dashboard'
+                  ? 'whitespace-nowrap rounded-[1.2rem] border border-white/10 bg-gold-100/10 px-4 py-3 text-sm font-medium text-gold-100 transition hover:bg-white/10'
+                  : 'whitespace-nowrap rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/74 transition hover:bg-white/10'
+              }}"
+            >
+              Parametres
+            </a>
+          </div>
+
+          <div class="mt-6 hidden rounded-[1.75rem] border border-white/10 bg-white/5 p-4 lg:block">
+            <p class="font-display text-sm font-semibold uppercase tracking-[0.22em] text-gold-200">
+              Focus boutique
+            </p>
+            <p class="mt-3 text-sm leading-7 text-white/68">
+              Catalogue lisible, operations nettes, experience mobile prete pour les marchands
+              TindaX.
+            </p>
+            <a
+              href="{{ route('home') }}"
+              class="mt-4 inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-tindax-950 transition hover:bg-gold-100"
+            >
+              Retour au site public
+            </a>
+          </div>
+        </nav>
+      </aside>
+
+      <div class="min-h-screen">
+        <header class="sticky top-0 z-40 border-b border-white/70 bg-mist/90 backdrop-blur-xl">
+          <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+            <div>
+              <p class="font-display text-lg font-semibold text-tindax-950">
+                Tableau de bord marchand
+              </p>
+              <p class="text-sm text-slate-500">
+                Catalogue, disponibilite produit et pilotage boutique
+              </p>
+            </div>
+
+            <a
+              href="{{ route('home') }}"
+              class="hidden rounded-full border border-tindax-200 px-4 py-2 text-sm font-semibold text-tindax-900 transition hover:bg-white lg:inline-flex"
+            >
+              Voir le site public
+            </a>
+          </div>
+        </header>
+
+        <div class="mx-auto max-w-7xl px-4 pt-5 sm:px-6 lg:px-8">
+          @if(flashMessages.has('success'))
+            <div class="rounded-[1.5rem] border border-tindax-200 bg-tindax-50 px-5 py-4 text-sm font-medium text-tindax-900 shadow-sm">
+              {{ flashMessages.get('success') }}
+            </div>
+          @end
+
+          @if(flashMessages.has('info'))
+            <div class="rounded-[1.5rem] border border-gold-200 bg-gold-100/80 px-5 py-4 text-sm font-medium text-amber-900 shadow-sm">
+              {{ flashMessages.get('info') }}
+            </div>
+          @end
+
+          @if(flashMessages.has('error'))
+            <div class="rounded-[1.5rem] border border-rose-200 bg-rose-50 px-5 py-4 text-sm font-medium text-rose-900 shadow-sm">
+              {{ flashMessages.get('error') }}
+            </div>
+          @end
+        </div>
+
+        <main>
+          @!section('content')
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

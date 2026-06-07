@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="TindaX, plateforme premium de livraison et de multi-services en Republique Democratique du Congo."
+    />
+    <title>TindaX | Livraison et multi-services en RDC</title>
+
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=manrope:400,500,600,700,800|sora:500,600,700,800"
+      rel="stylesheet"
+    />
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('dumper')
+  </head>
+  <body class="min-h-screen bg-mist font-sans text-ink antialiased">
+    <div class="page-shell">
+      <div class="page-top-glow"></div>
+
+      @include('components/partials/header')
+
+      @if(flashMessages.has('success'))
+        <div class="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="rounded-[1.5rem] border border-tindax-200 bg-tindax-50 px-5 py-4 text-sm font-medium text-tindax-900 shadow-sm">
+            {{ flashMessages.get('success') }}
+          </div>
+        </div>
+      @end
+
+      @if(flashMessages.has('info'))
+        <div class="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="rounded-[1.5rem] border border-gold-200 bg-gold-100/80 px-5 py-4 text-sm font-medium text-amber-900 shadow-sm">
+            {{ flashMessages.get('info') }}
+          </div>
+        </div>
+      @end
+
+      @if(flashMessages.has('error'))
+        <div class="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="rounded-[1.5rem] border border-rose-200 bg-rose-50 px-5 py-4 text-sm font-medium text-rose-900 shadow-sm">
+            {{ flashMessages.get('error') }}
+          </div>
+        </div>
+      @end
+
+      <main>
+        @!section('content')
+      </main>
+
+      @include('components/partials/footer')
+    </div>
+  </body>
+</html>

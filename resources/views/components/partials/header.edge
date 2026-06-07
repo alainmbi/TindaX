@@ -1,0 +1,163 @@
+<header class="sticky top-0 z-50 border-b border-white/70 bg-mist/90 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+    <a href="{{ route('home') }}" class="flex items-center gap-3">
+      <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-tindax-900 text-lg font-extrabold text-white shadow-panel">
+        T
+      </span>
+      <div class="space-y-0.5">
+        <span class="block font-display text-lg font-semibold tracking-tight text-tindax-900">
+          TindaX
+        </span>
+        <span class="block text-xs text-slate-500">
+          Livraison et multi-services en RDC
+        </span>
+      </div>
+    </a>
+
+    <div class="hidden items-center gap-3 md:flex">
+      <nav aria-label="Navigation principale">
+        <ul class="flex items-center gap-2 rounded-full border border-tindax-100 bg-white/90 p-1 text-sm text-slate-600 shadow-sm">
+          <li>
+            <a
+              href="{{ route('home') }}"
+              class="rounded-full px-4 py-2 font-medium text-tindax-900 transition hover:bg-tindax-50"
+            >
+              Accueil
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ route('home') }}#services"
+              class="rounded-full px-4 py-2 font-medium transition hover:bg-tindax-50 hover:text-tindax-900"
+            >
+              Services
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ route('home') }}#ecosysteme"
+              class="rounded-full px-4 py-2 font-medium transition hover:bg-tindax-50 hover:text-tindax-900"
+            >
+              Ecosysteme
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ route('home') }}#contact"
+              class="rounded-full px-4 py-2 font-medium transition hover:bg-tindax-50 hover:text-tindax-900"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <a
+        href="{{ route('home') }}#contact"
+        class="inline-flex items-center justify-center rounded-full border border-tindax-200 px-4 py-2 text-sm font-semibold text-tindax-900 transition hover:border-tindax-300 hover:bg-white"
+      >
+        Devenir partenaire
+      </a>
+      <a
+        href="{{ route('home') }}#hero-action"
+        class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-5 py-2.5 text-sm font-semibold text-white shadow-panel transition hover:bg-tindax-800"
+      >
+        Commander
+      </a>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-tindax-100 bg-white text-tindax-900 shadow-sm transition hover:bg-tindax-50 md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-navigation-panel"
+      aria-label="Ouvrir le menu"
+      data-mobile-menu-toggle
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="mobile-navigation-panel"
+    class="hidden fixed inset-0 z-50 md:hidden"
+    data-mobile-menu
+  >
+    <button
+      type="button"
+      class="absolute inset-0 bg-ink/35 backdrop-blur-sm"
+      aria-label="Fermer le menu"
+      data-mobile-menu-backdrop
+      data-mobile-menu-close
+    ></button>
+
+    <div class="relative ml-auto flex h-full w-full max-w-xs flex-col bg-white p-5 shadow-soft">
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <p class="font-display text-lg font-semibold text-tindax-950">TindaX</p>
+          <p class="text-sm text-slate-500">Navigation rapide</p>
+        </div>
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 text-slate-700 transition hover:bg-slate-50"
+          aria-label="Fermer le menu"
+          data-mobile-menu-close
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <nav aria-label="Navigation mobile" class="mt-8 flex flex-col gap-2 text-sm">
+        <a
+          href="{{ route('home') }}"
+          class="rounded-2xl bg-tindax-900 px-4 py-3 font-semibold text-white"
+          data-mobile-menu-close
+        >
+          Accueil
+        </a>
+        <a
+          href="{{ route('home') }}#services"
+          class="rounded-2xl border border-tindax-100 px-4 py-3 font-medium text-slate-700"
+          data-mobile-menu-close
+        >
+          Services
+        </a>
+        <a
+          href="{{ route('home') }}#ecosysteme"
+          class="rounded-2xl border border-tindax-100 px-4 py-3 font-medium text-slate-700"
+          data-mobile-menu-close
+        >
+          Ecosysteme
+        </a>
+        <a
+          href="{{ route('home') }}#contact"
+          class="rounded-2xl border border-tindax-100 px-4 py-3 font-medium text-slate-700"
+          data-mobile-menu-close
+        >
+          Contact
+        </a>
+      </nav>
+
+      <div class="mt-auto grid gap-3 pt-8">
+        <a
+          href="{{ route('home') }}#contact"
+          class="inline-flex items-center justify-center rounded-full border border-tindax-200 px-5 py-3 text-sm font-semibold text-tindax-900"
+          data-mobile-menu-close
+        >
+          Devenir partenaire
+        </a>
+        <a
+          href="{{ route('home') }}#hero-action"
+          class="inline-flex items-center justify-center rounded-full bg-tindax-900 px-5 py-3 text-sm font-semibold text-white"
+          data-mobile-menu-close
+        >
+          Commander
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
